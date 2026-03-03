@@ -1,3 +1,4 @@
+<?php
 function my_custom_register_user() {
 
     $username = 'imran123';
@@ -27,3 +28,23 @@ function my_custom_register_user() {
 
     return $user_id;
 }
+
+global $wpdb;
+
+$table_name = $wpdb->prefix . 'custom_quotes';
+
+$wpdb->insert(
+    $table_name,
+    array(
+        'user_id'    => get_current_user_id(),
+        'product_id' => 123,
+        'message'    => 'Need bulk price',
+        'status'     => 'pending',
+    ),
+    array(
+        '%d',
+        '%d',
+        '%s',
+        '%s',
+    )
+);
